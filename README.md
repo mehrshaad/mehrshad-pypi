@@ -2,7 +2,9 @@
 A Python 3 module that contains all of my collections to let you code easier!
 
 ## Instalation
-```pip install mehrshad```
+```sh
+pip install mehrshad
+```
 
 ## Compatibility
 + Windows / macOS / Linux
@@ -15,6 +17,9 @@ A Python 3 module that contains all of my collections to let you code easier!
 + [py-notifier](https://pypi.org/project/py-notifier/)
 + [win10toast](https://pypi.org/project/win10toast/)
 + [tqdm](https://pypi.org/project/tqdm/)
+
+## NOTE
+Currently in Beta version, so errors possible.
 
 ## Links
 + PyPi: [mehrshad-pypi](https://pypi.org/project/mehrshad/)
