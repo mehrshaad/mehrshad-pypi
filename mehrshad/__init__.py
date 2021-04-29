@@ -2,7 +2,11 @@ import os
 import turtle
 from collections import Counter
 from math import factorial, gcd, sqrt
-
+import subprocess
+subprocess.call(['pip', 'install', 'win10toast'])
+subprocess.call(['pip', 'install', 'py-notifier'])
+subprocess.call(['pip', 'install', 'tqdm'])
+from pynotifier import Notification
 from tqdm import tqdm  # progress feature in loops
 
 

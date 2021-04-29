@@ -4,7 +4,9 @@ import pathlib
 from openpyxl import *
 from openpyxl.styles import Border, Font, Side
 from win32com import client
-
+import subprocess
+subprocess.call(['pip', 'install', 'pathlib'])
+subprocess.call(['pip', 'install', 'openpyxl'])
 defaultFileName = ''
 defaultFilePath = ''
 
