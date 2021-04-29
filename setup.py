@@ -9,7 +9,7 @@ setup(
     author_email='mehrdadashzadeh1379@gmail.com',
     url='https://github.com/mehrshaad/mehrshad-pypi',
     license='MIT',
-    download_url='https://github.com/mehrshaad/mehrshad-pypi/archive/refs/tags/v0.1-beta.tar.gz',
+    download_url='https://github.com/mehrshaad/mehrshad-pypi/archive/refs/tags/v0.2-beta.tar.gz',
     keywords=['mehrshad', 'json', 'excel', 'pygame'],
     classifiers=[
         'Development Status :: 4 - Beta',
