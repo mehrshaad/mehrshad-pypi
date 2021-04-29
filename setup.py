@@ -14,8 +14,8 @@ setup(
     classifiers=[
         'Development Status :: 4 - Beta',
         'License :: OSI Approved :: MIT License',
-        'Operating System :: Microsoft :: Windows',
-        'Operating System :: MacOS',
+        'Operating System :: OS Independent',
         'Programming Language :: Python :: 3',
     ],
+    python_requires='>=3.4',
 )
