@@ -11,9 +11,7 @@ setup(
     license='MIT',
     download_url='https://github.com/mehrshaad/mehrshad-pypi/archive/refs/tags/v0.1-beta.tar.gz',
     keywords=['mehrshad', 'json', 'excel', 'pygame'],
-    install_requires=['tqdm', 'win10toast',
-                      'py-notifier', 'pathlib', 'openpyxl', 'pygame'],
-    classifiers=classifiers=[
+    classifiers=[
         'Development Status :: 4 - Beta',
         'License :: OSI Approved :: MIT License',
         'Operating System :: Microsoft :: Windows',
