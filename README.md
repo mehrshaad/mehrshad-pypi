@@ -8,7 +8,7 @@ pip install mehrshad
 
 ## Compatibility
 + Windows / macOS / Linux
-+ Python 3.x (might be errors with Python 2.x)
++ Python 3.x (might get errors with Python 2.x)
 
 ## Used Packages
 + [openpyxl](https://pypi.org/project/openpyxl/)
