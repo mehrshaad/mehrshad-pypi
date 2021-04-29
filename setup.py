@@ -10,12 +10,12 @@ setup(
     version='0.3-beta',
     description='A Python 3 module that contains all of my collections to let you code easier!',
     long_description=long_description,
-    long_description_content_type='text/markdown'
+    long_description_content_type='text/markdown',
     author='Mehrshad Dadashzadeh',
     author_email='mehrdadashzadeh1379@gmail.com',
     url='https://github.com/mehrshaad/mehrshad-pypi',
     license='MIT',
-    download_url='https://github.com/mehrshaad/mehrshad-pypi/archive/refs/tags/v0.2-beta.tar.gz',
+    download_url='https://github.com/mehrshaad/mehrshad-pypi/archive/refs/tags/v0.3-beta.tar.gz',
     keywords=['mehrshad', 'json', 'excel', 'pygame'],
     classifiers=[
         'Development Status :: 4 - Beta',
@@ -23,4 +23,5 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 3',
     ],
+    python_requires='>=3.4',
 )
