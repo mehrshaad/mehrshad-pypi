@@ -16,7 +16,6 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Operating System :: Microsoft :: Windows',
         'Operating System :: MacOS',
-        'Operating System :: Linux',
         'Programming Language :: Python :: 3',
     ],
 )
