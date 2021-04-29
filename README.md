@@ -26,8 +26,6 @@ Currently in Beta version, so errors possible.
 + Arthur: [Mehrshad Dadashzadeh](https://github.com/mehrshaad/)
 
 ## MIT License
-MIT License
-
 Copyright (c) 2021 Mehrshad Dadashzadeh
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
