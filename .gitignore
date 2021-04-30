@@ -8,8 +8,6 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-.pypirc
-setup.py
 build/
 develop-eggs/
 dist/
@@ -114,3 +112,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# i added
+setup.py
+.idea
+.pypirc
