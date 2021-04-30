@@ -117,3 +117,5 @@ dmypy.json
 setup.py
 .idea
 .pypirc
+MANIFEST.in
+README.txt
