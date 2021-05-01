@@ -2,6 +2,8 @@
 A Python 3 module that contains all of my collections to let you code easier!
 
 ## Installation
+Open terminal/cmd and enter:
+
 ```sh
 pip install mehrshad
 ```
@@ -17,9 +19,10 @@ pip install mehrshad
 + [py-notifier](https://pypi.org/project/py-notifier/)
 + [win10toast](https://pypi.org/project/win10toast/)
 + [tqdm](https://pypi.org/project/tqdm/)
+All of these packages will be automatically installed after the first run! (if you don't already have them)
 
 ## NOTE
-Currently in Beta version, so errors possible.
+Currently in *Beta* version, so errors possible.
 
 ## Links
 + PyPi: [mehrshad-pypi](https://pypi.org/project/mehrshad/)
