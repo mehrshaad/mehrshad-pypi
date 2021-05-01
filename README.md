@@ -19,6 +19,7 @@ pip install mehrshad
 + [py-notifier](https://pypi.org/project/py-notifier/)
 + [win10toast](https://pypi.org/project/win10toast/)
 + [tqdm](https://pypi.org/project/tqdm/)
+
 All of these packages will be automatically installed after the first run! (if you don't already have them)
 
 ## NOTE
