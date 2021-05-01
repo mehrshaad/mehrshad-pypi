@@ -20,7 +20,7 @@ pip install mehrshad
 + [win10toast](https://pypi.org/project/win10toast/)
 + [tqdm](https://pypi.org/project/tqdm/)
 
-All of these packages will be automatically installed after the first run! (if you don't already have them)
+All of these packages will be automatically installed after the first run! (if you don't have them already)
 
 ## NOTE
 Currently in *Beta* version, so errors possible.
