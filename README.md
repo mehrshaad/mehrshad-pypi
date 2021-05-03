@@ -28,8 +28,8 @@ Currently in *Beta* version, so errors possible.
 ## Links
 + PyPI: [mehrshad-pypi](https://pypi.org/project/mehrshad/)
 + Arthur: [Mehrshad Dadashzadeh](http://mehrshaad.github.io/)
-    + GitHub: [Mehrshad Dadashzadeh](https://github.com/mehrshaad/)
-    + LinkedIn: [Mehrshad Dadashzadeh](https://www.linkedin.com/in/mehrshad-dadashzadeh-7053491b3/)
+    + [GitHub](https://github.com/mehrshaad/)
+    + [LinkedIn](https://www.linkedin.com/in/mehrshad-dadashzadeh-7053491b3/)
 
 ## MIT License
 Copyright (c) 2021 Mehrshad Dadashzadeh
