@@ -26,8 +26,10 @@ All of these packages will be automatically installed after the first run! (if y
 Currently in *Beta* version, so errors possible.
 
 ## Links
-+ PyPi: [mehrshad-pypi](https://pypi.org/project/mehrshad/)
-+ Arthur: [Mehrshad Dadashzadeh](https://github.com/mehrshaad/)
++ PyPI: [mehrshad-pypi](https://pypi.org/project/mehrshad/)
++ Arthur: [Mehrshad Dadashzadeh](http://mehrshaad.github.io/)
++ + GitHub: [Mehrshad Dadashzadeh](https://github.com/mehrshaad/)
++ + LinkedIn: [Mehrshad Dadashzadeh](https://www.linkedin.com/in/mehrshad-dadashzadeh-7053491b3/)
 
 ## MIT License
 Copyright (c) 2021 Mehrshad Dadashzadeh
