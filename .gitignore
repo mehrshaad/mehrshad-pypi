@@ -115,6 +115,7 @@ dmypy.json
 
 # i added
 setup.py
+test.py
 .idea
 .pypirc
 MANIFEST.in

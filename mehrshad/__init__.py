@@ -1,12 +1,24 @@
-"""Hey my name is Mehrshad!
+"""
++ mehrshad:
+    huge thanks for installing and using my package!
+    this package is all of my works in python.
+    every needed external imported package will be installed after the first you run your python file when imported this package.
+    
++ naming:
+    i used camelCase for nameing functions,
+    and PascalCase for naming classes.
 
-thanks for downloading my PyPi package.
-
-this package is my top function and class collections in python.
-I hope it'll be useful! I'll update it time to time.
-
-for any suggestions give a visit to my GitHub page:
-https://github.com/mehrshaad/"""
++ function names in this file:
+    Json: this class will let you manage everything about json files very easily! you can create, write, save, update and etc.
+    Excel: [description]
+    Text: [description]
+    
++ credits:
+    arthur: (Ali) Mehrshad Dadashzadeh
+    github: https://github.com/mehrshaad/mehrshad-pypi
+    linkedIn: https://www.linkedin.com/in/mehrshad-dadashzadeh-7053491b3
+    pypi: https://pypi.org/project/mehrshad
+"""
 
 import os
 import subprocess
@@ -28,7 +40,13 @@ except ModuleNotFoundError:
     from pynotifier import Notification as notification
 
 
-def binomialTheorem(power: int, printInput: bool = False, printOutput: bool = False, returnStr: bool = False, supPower: bool = True, sign: str = ' + ', alphas: list = ['x', 'y']):
+def binomialTheorem(power: int,
+                    printInput: bool = False,
+                    printOutput: bool = False,
+                    returnStr: bool = False,
+                    supPower: bool = True,
+                    sign: str = ' + ',
+                    alphas: list = ['x', 'y']):
     """this function is used for getting binomial theorem:
        example: (x+y)² = x² + 2xy + y²
 
@@ -53,12 +71,12 @@ def binomialTheorem(power: int, printInput: bool = False, printOutput: bool = Fa
                 print(f'({alphas[0]}+{alphas[1]})^{power}')
         output = []  # an empty list that we place the output things in it
 
-        for k in range(power+1):  # adding all elements to output list
+        for k in range(power + 1):  # adding all elements to output list
             C = combination(power, k)
             if supPower:
                 # making number power like (some os's might not support)
                 NP1 = Number_to_Power(k)
-                NP2 = Number_to_Power(power-k)
+                NP2 = Number_to_Power(power - k)
             else:
                 NP1 = f'^{k}'
                 NP2 = f'^{power-k}'
@@ -67,10 +85,11 @@ def binomialTheorem(power: int, printInput: bool = False, printOutput: bool = Fa
 
             if k == 0:
                 output.append(f'{C}{alphas[1]}{NP2}')
-            elif power-k == 0:
+            elif power - k == 0:
                 output.append(f'{C}{alphas[0]}{NP1}')
             else:
-                if (NP1 == '¹' and NP2 == '¹') or (NP1 == '^1' and NP2 == '^1'):
+                if (NP1 == '¹' and NP2 == '¹') or (NP1 == '^1'
+                                                   and NP2 == '^1'):
                     output.append(f'{C}{alphas[0]}{alphas[1]}')
                 elif NP1 == '¹' or NP1 == '^1':
                     output.append(f'{C}{alphas[0]}{alphas[1]}{NP2}')
@@ -145,7 +164,9 @@ def baseToTen(num: str, base: int):
     return int(num, base)
 
 
-def baseTenToOther(num: int, base: int, numerals: str = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"):
+def baseTenToOther(num: int,
+                   base: int,
+                   numerals: str = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"):
     """this function is used for converting a `10` based number to any other base!
 
     Args:
@@ -156,7 +177,9 @@ def baseTenToOther(num: int, base: int, numerals: str = "0123456789ABCDEFGHIJKLM
     Returns:
         str: your base-10 inputted number converted to the base you inputted
     """
-    return ((num == 0) and numerals[0]) or (baseTenToOther(num // base, base, numerals).lstrip(numerals[0]) + numerals[num % base])
+    return ((num == 0) and numerals[0]) or (
+        baseTenToOther(num // base, base, numerals).lstrip(numerals[0]) +
+        numerals[num % base])
 
 
 def countDigits(number: int):
@@ -171,7 +194,10 @@ def countDigits(number: int):
     return len(str(number))
 
 
-def createTxt(text, address: str = '.', fileName: str = 'Text', clearTxt: bool = True):
+def createTxt(text,
+              address: str = '.',
+              fileName: str = 'Text',
+              clearTxt: bool = True):
     """Used For Creating a .txt file in your address"""
     try:
         with open(f'{address}\{fileName}.txt', 'a+') as file:
@@ -185,7 +211,6 @@ def createTxt(text, address: str = '.', fileName: str = 'Text', clearTxt: bool =
 
 def Diamond_Pattern(Number_of_Rows):
     """For Creating Diamond Patterns Built From ' * '"""
-
     def Star_Shapes(Num):
         return '*' * Num
 
@@ -297,7 +322,7 @@ def is_Sum_of_Digit_Power(number, power):
     SumDP = 0
     mioDP = abs(number)
     while mioDP > 0:
-        SumDP += (mioDP % 10) ** power
+        SumDP += (mioDP % 10)**power
         mioDP //= 10
     if int(SumDP) == int(abs(number)):
         return True
@@ -317,6 +342,7 @@ def isComplete(number):
 
 def isEqual_to_Dingit_Factorial(number):
     if number >= 0:
+
         def F(number):
             if number == 0:
                 return 1
@@ -404,7 +430,8 @@ def Mex_of_List(List: list, Return=list):
         return "'Return' value error"
 
 
-def Min_Step_To_Target_Elephant_Chess(first_pos: list, target_pos: list, board: int):
+def Min_Step_To_Target_Elephant_Chess(first_pos: list, target_pos: list,
+                                      board: int):
     """this function returns minimum step to reach target position
     in chess elephant piece.
 
@@ -419,7 +446,6 @@ def Min_Step_To_Target_Elephant_Chess(first_pos: list, target_pos: list, board: 
     class cell:
         """Python3 code to find minimum steps to reach
         to specific cell in minimum moves by Knight"""
-
         def __init__(self, x=0, y=0, dist=0):
             self.x = x
             self.y = y
@@ -431,6 +457,7 @@ def Min_Step_To_Target_Elephant_Chess(first_pos: list, target_pos: list, board: 
         if x >= 1 and x <= board and y >= 1 and y <= board:
             return True
         return False
+
     # all possible moves for the elephant
     dx = [2, 2, -2, -2, 1, 1, -1, -1]
     dy = [1, -1, 1, -1, 2, -2, 2, -2]
@@ -443,19 +470,18 @@ def Min_Step_To_Target_Elephant_Chess(first_pos: list, target_pos: list, board: 
     # visit starting state
     visited[first_pos[0]][first_pos[1]] = True
     # loop until we have one element in queue
-    while(len(queue) > 0):
+    while (len(queue) > 0):
         t = queue[0]
         queue.pop(0)
         # if current cell is equal to target
         # cell, return its distance
-        if(t.x == target_pos[0] and
-           t.y == target_pos[1]):
+        if (t.x == target_pos[0] and t.y == target_pos[1]):
             return t.dist
         # iterate for all reachable states
         for i in range(8):
             x = t.x + dx[i]
             y = t.y + dy[i]
-            if(isInside(x, y, board) and not visited[x][y]):
+            if (isInside(x, y, board) and not visited[x][y]):
                 visited[x][y] = True
                 queue.append(cell(x, y, t.dist + 1))
 
@@ -507,8 +533,10 @@ def Next_Bigger_Number_With_Same_Digits(number):
 
 def Num_to_Weekday(num, first_day="Saturday", all_week_days=False):
     first_day = first_day[0].upper() + first_day[1:].lower()
-    week_days = ["Saturday", "Sunday", "Monday",
-                 "Tuesday", "Wednesday", "Thursday", "Friday"]
+    week_days = [
+        "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
+        "Friday"
+    ]
     if not first_day in week_days:
         return "Please Choose a Correct first_day!"
     while week_days[0] != first_day:
@@ -720,26 +748,57 @@ def Sudoku_Solver(num_list_9x9: list, blank: str = '0'):
                     continue
         lns = {}
         rgns = {
-            'rgn1': ['ln1 0', 'ln1 1', 'ln1 2', 'ln2 0', 'ln2 1', 'ln2 2', 'ln3 0', 'ln3 1', 'ln3 2'],
-            'rgn2': ['ln1 3', 'ln1 4', 'ln1 5', 'ln2 3', 'ln2 4', 'ln2 5', 'ln3 3', 'ln3 4', 'ln3 5'],
-            'rgn3': ['ln1 6', 'ln1 7', 'ln1 8', 'ln2 6', 'ln2 7', 'ln2 8', 'ln3 6', 'ln3 7', 'ln3 8'],
-            'rgn4': ['ln4 0', 'ln4 1', 'ln4 2', 'ln5 0', 'ln5 1', 'ln5 2', 'ln6 0', 'ln6 1', 'ln6 2'],
-            'rgn5': ['ln4 3', 'ln4 4', 'ln4 5', 'ln5 3', 'ln5 4', 'ln5 5', 'ln6 3', 'ln6 4', 'ln6 5'],
-            'rgn6': ['ln4 6', 'ln4 7', 'ln4 8', 'ln5 6', 'ln5 7', 'ln5 8', 'ln6 6', 'ln6 7', 'ln6 8'],
-            'rgn7': ['ln7 0', 'ln7 1', 'ln7 2', 'ln8 0', 'ln8 1', 'ln8 2', 'ln9 0', 'ln9 1', 'ln9 2'],
-            'rgn8': ['ln7 3', 'ln7 4', 'ln7 5', 'ln8 3', 'ln8 4', 'ln8 5', 'ln9 3', 'ln9 4', 'ln9 5'],
-            'rgn9': ['ln7 6', 'ln7 7', 'ln7 8', 'ln8 6', 'ln8 7', 'ln8 8', 'ln9 6', 'ln9 7', 'ln9 8']
+            'rgn1': [
+                'ln1 0', 'ln1 1', 'ln1 2', 'ln2 0', 'ln2 1', 'ln2 2', 'ln3 0',
+                'ln3 1', 'ln3 2'
+            ],
+            'rgn2': [
+                'ln1 3', 'ln1 4', 'ln1 5', 'ln2 3', 'ln2 4', 'ln2 5', 'ln3 3',
+                'ln3 4', 'ln3 5'
+            ],
+            'rgn3': [
+                'ln1 6', 'ln1 7', 'ln1 8', 'ln2 6', 'ln2 7', 'ln2 8', 'ln3 6',
+                'ln3 7', 'ln3 8'
+            ],
+            'rgn4': [
+                'ln4 0', 'ln4 1', 'ln4 2', 'ln5 0', 'ln5 1', 'ln5 2', 'ln6 0',
+                'ln6 1', 'ln6 2'
+            ],
+            'rgn5': [
+                'ln4 3', 'ln4 4', 'ln4 5', 'ln5 3', 'ln5 4', 'ln5 5', 'ln6 3',
+                'ln6 4', 'ln6 5'
+            ],
+            'rgn6': [
+                'ln4 6', 'ln4 7', 'ln4 8', 'ln5 6', 'ln5 7', 'ln5 8', 'ln6 6',
+                'ln6 7', 'ln6 8'
+            ],
+            'rgn7': [
+                'ln7 0', 'ln7 1', 'ln7 2', 'ln8 0', 'ln8 1', 'ln8 2', 'ln9 0',
+                'ln9 1', 'ln9 2'
+            ],
+            'rgn8': [
+                'ln7 3', 'ln7 4', 'ln7 5', 'ln8 3', 'ln8 4', 'ln8 5', 'ln9 3',
+                'ln9 4', 'ln9 5'
+            ],
+            'rgn9': [
+                'ln7 6', 'ln7 7', 'ln7 8', 'ln8 6', 'ln8 7', 'ln8 8', 'ln9 6',
+                'ln9 7', 'ln9 8'
+            ]
         }
         for i in range(9):
-            lns["ln" + str(len(lns)+1)] = num_list_9x9[i]
+            lns["ln" + str(len(lns) + 1)] = num_list_9x9[i]
 
         def locate_vars(lst, item):
             return [i for i, x in enumerate(lst) if x == item]
 
-        locs = [ln + " " + str(item)
-                for ln in lns for item in locate_vars(lns[ln], blank)]
-        possible_nums = {loc: ['1', '2', '3', '4',
-                               '5', '6', '7', '8', '9'] for loc in locs}
+        locs = [
+            ln + " " + str(item) for ln in lns
+            for item in locate_vars(lns[ln], blank)
+        ]
+        possible_nums = {
+            loc: ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+            for loc in locs
+        }
 
         def naked_single(loc):
             ln_of_loc = loc.split()[0]
@@ -750,8 +809,8 @@ def Sudoku_Solver(num_list_9x9: list, blank: str = '0'):
             for rgn in rgns:
                 if loc in rgns[rgn]:
                     for item in rgns[rgn]:
-                        temp_list_2.append(
-                            lns[item.split()[0]][int(item.split()[1])])
+                        temp_list_2.append(lns[item.split()[0]][int(
+                            item.split()[1])])
 
             impossible_nums = list(dict.fromkeys(temp_list_2))
             impossible_nums.remove(blank)
@@ -761,25 +820,46 @@ def Sudoku_Solver(num_list_9x9: list, blank: str = '0'):
 
         def hidden_single(loc):
             locs_of_the_vars_of_the_same_ln = [
-                item for item in locs if item.split()[0] == loc.split()[0] and item != loc]
+                item for item in locs
+                if item.split()[0] == loc.split()[0] and item != loc
+            ]
             locs_of_the_vars_of_the_same_col = [
-                item for item in locs if item.split()[1] == loc.split()[1] and item != loc]
+                item for item in locs
+                if item.split()[1] == loc.split()[1] and item != loc
+            ]
             for rgn in rgns:
                 if loc in rgns[rgn]:
                     locs_of_the_vars_of_the_same_rgn = [
-                        item for item in rgns[rgn] if item in locs and item != loc]
+                        item for item in rgns[rgn]
+                        if item in locs and item != loc
+                    ]
 
             possible_nums_of_the_vars_of_the_same_ln = [
-                item2 for item1 in locs_of_the_vars_of_the_same_ln for item2 in possible_nums[item1]]
+                item2 for item1 in locs_of_the_vars_of_the_same_ln
+                for item2 in possible_nums[item1]
+            ]
             possible_nums_of_the_vars_of_the_same_col = [
-                item2 for item1 in locs_of_the_vars_of_the_same_col for item2 in possible_nums[item1]]
+                item2 for item1 in locs_of_the_vars_of_the_same_col
+                for item2 in possible_nums[item1]
+            ]
             possible_nums_of_the_vars_of_the_same_rgn = [
-                item2 for item1 in locs_of_the_vars_of_the_same_rgn for item2 in possible_nums[item1]]
+                item2 for item1 in locs_of_the_vars_of_the_same_rgn
+                for item2 in possible_nums[item1]
+            ]
 
             temps = {
-                'possible_nums_1': [item for item in possible_nums[loc] if not item in possible_nums_of_the_vars_of_the_same_ln],
-                'possible_nums_2': [item for item in possible_nums[loc] if not item in possible_nums_of_the_vars_of_the_same_col],
-                'possible_nums_3': [item for item in possible_nums[loc] if not item in possible_nums_of_the_vars_of_the_same_rgn]
+                'possible_nums_1': [
+                    item for item in possible_nums[loc]
+                    if not item in possible_nums_of_the_vars_of_the_same_ln
+                ],
+                'possible_nums_2': [
+                    item for item in possible_nums[loc]
+                    if not item in possible_nums_of_the_vars_of_the_same_col
+                ],
+                'possible_nums_3': [
+                    item for item in possible_nums[loc]
+                    if not item in possible_nums_of_the_vars_of_the_same_rgn
+                ]
             }
 
             for item1 in temps:
@@ -789,52 +869,82 @@ def Sudoku_Solver(num_list_9x9: list, blank: str = '0'):
         def naked_pairs(loc):
             impossible_nums = []
             categories = {
-                'locs_of_the_vars_of_the_same_ln': [item for item in locs if item.split()[0] == loc.split()[0] and item != loc],
-                'locs_of_the_vars_of_the_same_col': [item for item in locs if item.split()[1] == loc.split()[1] and item != loc],
+                'locs_of_the_vars_of_the_same_ln': [
+                    item for item in locs
+                    if item.split()[0] == loc.split()[0] and item != loc
+                ],
+                'locs_of_the_vars_of_the_same_col': [
+                    item for item in locs
+                    if item.split()[1] == loc.split()[1] and item != loc
+                ],
                 'locs_of_the_vars_of_the_same_rgn': []
             }
             for rgn in rgns:
                 if loc in rgns[rgn]:
                     categories['locs_of_the_vars_of_the_same_rgn'] = [
-                        item for item in rgns[rgn] if item in locs and item != loc]
+                        item for item in rgns[rgn]
+                        if item in locs and item != loc
+                    ]
             for item1 in categories:
                 temp = categories[item1]
                 for item2 in temp:
                     for item3 in temp:
                         if item2 != item3:
-                            if possible_nums[item2] == possible_nums[item3] and len(possible_nums[item2]) == 2:
+                            if possible_nums[item2] == possible_nums[
+                                    item3] and len(possible_nums[item2]) == 2:
                                 for num in possible_nums[item2]:
                                     while num in possible_nums[loc]:
                                         possible_nums[loc].remove(num)
 
         def hidden_pairs(loc):
             categories = {
-                'locs_of_the_vars_of_the_same_ln': [item for item in locs if item.split()[0] == loc.split()[0] and item != loc],
-                'locs_of_the_vars_of_the_same_col': [item for item in locs if item.split()[1] == loc.split()[1] and item != loc],
+                'locs_of_the_vars_of_the_same_ln': [
+                    item for item in locs
+                    if item.split()[0] == loc.split()[0] and item != loc
+                ],
+                'locs_of_the_vars_of_the_same_col': [
+                    item for item in locs
+                    if item.split()[1] == loc.split()[1] and item != loc
+                ],
                 'locs_of_the_vars_of_the_same_rgn': []
             }
             for rgn in rgns:
                 if loc in rgns[rgn]:
                     categories['locs_of_the_vars_of_the_same_rgn'] = [
-                        item for item in rgns[rgn] if item in locs and item != loc]
+                        item for item in rgns[rgn]
+                        if item in locs and item != loc
+                    ]
             for item1 in categories:
                 if len(categories[item1]) != 0:
                     possible_nums_of_the_vars_of_the_same_neighborhood = [
-                        item for location in categories[item1] for item in possible_nums[location]]
+                        item for location in categories[item1]
+                        for item in possible_nums[location]
+                    ]
                     frequencies_of_the_possible_nums_of_the_vars_of_the_same_neighborhood = dict(
-                        Counter(possible_nums_of_the_vars_of_the_same_neighborhood))
+                        Counter(
+                            possible_nums_of_the_vars_of_the_same_neighborhood)
+                    )
                     for item2 in categories[item1]:
-                        num_of_duplicates = len(possible_nums[loc] + possible_nums[item2]) - len(
-                            list(dict.fromkeys(possible_nums[loc] + possible_nums[item2])))
+                        num_of_duplicates = len(
+                            possible_nums[loc] + possible_nums[item2]) - len(
+                                list(
+                                    dict.fromkeys(possible_nums[loc] +
+                                                  possible_nums[item2])))
                         temp_dict = dict(
                             Counter(possible_nums[loc] + possible_nums[item2]))
                         if num_of_duplicates == 2:
                             nums_held_in_common = [
-                                item for item in temp_dict if temp_dict[item] == 2]
+                                item for item in temp_dict
+                                if temp_dict[item] == 2
+                            ]
                             temp_list = [
-                                item for item in nums_held_in_common if frequencies_of_the_possible_nums_of_the_vars_of_the_same_neighborhood[item] == 1]
+                                item for item in nums_held_in_common if
+                                frequencies_of_the_possible_nums_of_the_vars_of_the_same_neighborhood[
+                                    item] == 1
+                            ]
                             if len(temp_list) == 2:
-                                for item3 in possible_nums[loc] + possible_nums[item2]:
+                                for item3 in possible_nums[
+                                        loc] + possible_nums[item2]:
                                     if not item3 in temp_list:
                                         while item3 in possible_nums[loc]:
                                             possible_nums[loc].remove(item3)
@@ -844,28 +954,44 @@ def Sudoku_Solver(num_list_9x9: list, blank: str = '0'):
         def naked_triples(loc):
             impossible_nums = []
             categories = {
-                'locs_of_the_vars_of_the_same_ln': [item for item in locs if item.split()[0] == loc.split()[0] and item != loc],
-                'locs_of_the_vars_of_the_same_col': [item for item in locs if item.split()[1] == loc.split()[1] and item != loc],
+                'locs_of_the_vars_of_the_same_ln': [
+                    item for item in locs
+                    if item.split()[0] == loc.split()[0] and item != loc
+                ],
+                'locs_of_the_vars_of_the_same_col': [
+                    item for item in locs
+                    if item.split()[1] == loc.split()[1] and item != loc
+                ],
                 'locs_of_the_vars_of_the_same_rgn': []
             }
             for rgn in rgns:
                 if loc in rgns[rgn]:
                     categories['locs_of_the_vars_of_the_same_rgn'] = [
-                        item for item in rgns[rgn] if item in locs and item != loc]
+                        item for item in rgns[rgn]
+                        if item in locs and item != loc
+                    ]
             for item1 in categories:
                 temp = categories[item1]
                 for item2 in temp:
                     for item3 in temp:
                         for item4 in temp:
                             if item2 != item3 and item2 != item4 and item3 != item4:
-                                if len(possible_nums[item2]) == 2 and len(possible_nums[item3]) == 2 and len(possible_nums[item4]) == 2:
+                                if len(possible_nums[item2]) == 2 and len(
+                                        possible_nums[item3]) == 2 and len(
+                                            possible_nums[item4]) == 2:
                                     temp_2 = possible_nums[item2] + \
                                         possible_nums[item3] + \
                                         possible_nums[item4]
-                                    if len(temp_2) - len(list(dict.fromkeys(temp_2))) == 3:
-                                        for item5 in list(dict.fromkeys(temp_2)):
+                                    if len(temp_2) - len(
+                                            list(dict.fromkeys(temp_2))) == 3:
+                                        for item5 in list(
+                                                dict.fromkeys(temp_2)):
                                             impossible_nums.append(item5)
-                                elif possible_nums[item2] == possible_nums[item3] and possible_nums[item2] == possible_nums[item4] and len(possible_nums[item2]) == 3:
+                                elif possible_nums[item2] == possible_nums[
+                                        item3] and possible_nums[
+                                            item2] == possible_nums[
+                                                item4] and len(
+                                                    possible_nums[item2]) == 3:
                                     for nums in possible_nums[item2]:
                                         impossible_nums.append(nums)
             for item in impossible_nums:
@@ -881,8 +1007,8 @@ def Sudoku_Solver(num_list_9x9: list, blank: str = '0'):
                 hidden_pairs(loc)
                 naked_triples(loc)
                 if len(possible_nums[loc]) == 1:
-                    lns[loc.split()[0]][int(loc.split()[1])
-                                        ] = possible_nums[loc][0]
+                    lns[loc.split()[0]][int(
+                        loc.split()[1])] = possible_nums[loc][0]
                     locs.remove(loc)
                     for ln in lns:
                         lst.append(lns[ln])
@@ -900,8 +1026,10 @@ def Sum_of_Digit(number):
 
 def Weekday_to_Num(weekday, first_day='saturday'):
     first_day = first_day.lower()
-    week_days = ['saturday', 'sunday', 'monday',
-                 'tuesday', 'wednesday', 'thursday', 'friday']
+    week_days = [
+        'saturday', 'sunday', 'monday', 'tuesday', 'wednesday', 'thursday',
+        'friday'
+    ]
     try:
         if not first_day in week_days:
             return "Please Choose a Correct first_day!"
