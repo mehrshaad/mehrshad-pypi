@@ -35,6 +35,7 @@ import json as M2
 class Json:
     """this is the Json class. you can use it for managing json files.
     everything you need for managing your data with a json file, is in here!
+    it'll automatically creates json file if it's not there.
     
     NOTE: you can only enter file name as filePath argument.
     ---
@@ -51,10 +52,7 @@ class Json:
     + you can use '+' sign between a Json object and dict, and that will create a new Json object with updated data (dict).
     + you can use '+=' between a Json object and dict, and it will update the current data of Json object.
     """
-    def __init__(self,
-                 filePath: str,
-                 data: dict = {},
-                 createFile: bool = True):
+    def __init__(self, filePath: str, data: dict = {}):
         filePath = filePath.strip().replace('\\', '/')
         if filePath == '' or filePath.split('/')[-1] == '':
             raise RuntimeError(
@@ -70,12 +68,10 @@ class Json:
             self.__fileName += '.json'
         try:
             self.__data = self.readFrom()
-            self.updateData(data)
-            self.updateFile()
         except:
             self.__data = data
-            if createFile:
-                self.__createJson(self.__data)
+        self.updateData(data)
+        self.updateFile()
 
     def __str__(self):
         return str(self.__data)
@@ -124,7 +120,7 @@ class Json:
         """use this function if you wand to clear all data from a json file.
 
         Raises:
-            RuntimeError: this error happens if the file isn't found.
+            FileNotFoundError: this error happens if the file isn't found.
             Exception: if anything unknown happens! for the most common errors it got solutions.
 
         Returns:
@@ -135,12 +131,12 @@ class Json:
             self.__data = {}
             return f"Mehrshad.FileManage.Json.clearFile({self.__fileName}) Successful!"
         except FileNotFoundError:
-            raise RuntimeError(
+            raise FileNotFoundError(
                 f"Mehrshad.FileManage.Json.clearFile({self.__fileName}) Error: {self.__fileName} does not exist!"
             )
-        except:
+        except Exception as error:
             raise Exception(
-                f"Mehrshad.FileManage.Json.clearFile({self.__fileName}) Error: unknown!"
+                f"Mehrshad.FileManage.Json.clearFile({self.__fileName}) Error: {error}"
             )
 
     def readFrom(self, getKeys: bool = False):
@@ -159,7 +155,7 @@ class Json:
             dict: the read data from json file. (if you set getKeys to True a list will return too)
         """
         try:
-            with open(self.__fileName) as json_file:
+            with open(self.__fileName, 'r') as json_file:
                 self.__data = M2.load(json_file)
 
             if getKeys:
