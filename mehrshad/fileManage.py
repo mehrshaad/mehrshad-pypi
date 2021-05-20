@@ -1,7 +1,7 @@
 """
 mehrshad.fileManage:
 ===
- huge thanks for using my package!
+ thanks for using my package!
  this is the fileManage file of my package.
  it provides all of my classes that built for file managing.
     
