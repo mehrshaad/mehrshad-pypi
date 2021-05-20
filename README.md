@@ -15,7 +15,6 @@ pip install mehrshad
 ## Used Packages
 + [openpyxl](https://pypi.org/project/openpyxl/)
 + [pathlib](https://pypi.org/project/pathlib/)
-+ [pygame](https://pypi.org/project/pygame/)
 + [py-notifier](https://pypi.org/project/py-notifier/)
 + [win10toast](https://pypi.org/project/win10toast/)
 + [tqdm](https://pypi.org/project/tqdm/)
