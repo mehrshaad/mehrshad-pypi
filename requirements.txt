@@ -1,0 +1,5 @@
+pywin32==300
+openpyxl==3.0.7
+py_notifier==0.2.0
+tqdm==4.60.0
+pynotifier==0.1
