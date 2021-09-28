@@ -5,7 +5,7 @@
     every needed external imported package will be installed after the first you run your python file when imported this package.
     
 + naming:
-    i used camelCase for nameing functions,
+    I used camelCase for nameing functions,
     and PascalCase for naming classes.
 
 + function names in this file:
@@ -14,7 +14,7 @@
     Text: [description]
     
 + credits:
-    arthur: (Ali) Mehrshad Dadashzadeh
+    author: (Ali) Mehrshad Dadashzadeh
     github: https://github.com/mehrshaad/mehrshad-pypi
     linkedIn: https://www.linkedin.com/in/mehrshad-dadashzadeh-7053491b3
     pypi: https://pypi.org/project/mehrshad
@@ -29,14 +29,14 @@ from math import factorial, gcd, sqrt
 try:
     from tqdm import tqdm as loopProgress  # progress feature in loops
 except ModuleNotFoundError:
-    subprocess.call(['pip', 'install', 'tqdm'])
+    subprocess.call(['pip3', 'install', 'tqdm'])
     from tqdm import tqdm as loopProgress
 
 try:
     from pynotifier import Notification as notification
 except ModuleNotFoundError:
-    subprocess.call(['pip', 'install', 'win10toast'])
-    subprocess.call(['pip', 'install', 'py-notifier'])
+    subprocess.call(['pip3', 'install', 'win10toast'])
+    subprocess.call(['pip3', 'install', 'py-notifier'])
     from pynotifier import Notification as notification
 
 

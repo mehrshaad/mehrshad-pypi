@@ -7,12 +7,12 @@ mehrshad.fileManage:
     
 naming:
 ---
- i used camelCase for nameing functions,
+ I used camelCase for nameing functions,
  and PascalCase for naming classes.
 
 class names in this file:
 ---
- Json: this class will let you manage everything about json files very easily! you can create, write, save, update and etc.
+ Json: This class will let you manage everything about json files very easily! you can create, write, save, update and etc.
  Text: coming soon ...
  Excel: coming soon ...
  SQL: coming soon ...
@@ -23,21 +23,22 @@ note:
  
 credits:
 ---
- arthur: (Ali) Mehrshad Dadashzadeh
- github: https://github.com/mehrshaad/mehrshad-pypi
- linkedIn: https://www.linkedin.com/in/mehrshad-dadashzadeh-7053491b3
- pypi: https://pypi.org/project/mehrshad
+ Author: (Ali) Mehrshad Dadashzadeh
+ GitHub: https://github.com/mehrshaad/mehrshad-pypi
+ LinkedIn: https://www.linkedin.com/in/mehrshad-dadashzadeh-7053491b3
+ PyPI: https://pypi.org/project/mehrshad
 """
 import os as M1
 import json as M2
+from typing import Union as M3
 
 
 class Json:
-    """this is the Json class. you can use it for managing json files.
-    everything you need for managing your data with a json file, is in here!
-    it'll automatically creates json file if it's not there.
+    """This is the Json class. You can use it for managing json files.
+    Everything you need for managing your data with a json file, is in here!
+    It'll automatically creates json file if it wasn't there.
     
-    NOTE: you can only enter file name as filePath argument.
+    NOTE: You can only enter file name as filePath argument.
     ---
     
     Functions:
@@ -60,25 +61,25 @@ class Json:
             )
         if filePath[0] == '/': filePath = filePath[1:]
         if filePath[-1] == '/': filePath = filePath[:-1]
-        self.__fileName = filePath
-        if len(self.__fileName) > 5:
-            if self.__fileName[-5:] != '.json':
-                self.__fileName += '.json'
+        self._fileName = filePath
+        if len(self._fileName) > 5:
+            if self._fileName[-5:] != '.json':
+                self._fileName += '.json'
         else:
-            self.__fileName += '.json'
+            self._fileName += '.json'
         try:
-            self.__data = self.read()
+            self._data = self.read()
         except:
-            self.__data = data
+            self._data = data
         self.update(data)
         self.save()
 
     def __str__(self):
-        return str(self.__data)
+        return str(self._data)
 
     def __add__(self, data: dict):
-        temp = self.__copy__()
-        temp.__data = self.__data.copy()
+        temp = self._copy__()
+        temp._data = self._data.copy()
         temp.update(data)
         return temp
 
@@ -87,9 +88,9 @@ class Json:
         return self
 
     def __copy__(self):
-        return type(self)(self.__fileName)
+        return type(self)(self._fileName)
 
-    def __create(self, data: dict = {}):
+    def _create(self, data: dict = {}):
         """this function is used for creating a json file based on the name and
         address you entered in when you were creating a Json object.
 
@@ -103,17 +104,17 @@ class Json:
             str: status of works at the end.
         """
         try:
-            open(self.__fileName, 'a+')
+            open(self._fileName, 'a+')
             if data != {}:
                 self.update(data, write=True)
-            return f"Mehrshad.FileManage.Json.__create({self.__fileName}) Successful!"
+            return f"Mehrshad.FileManage.Json._create({self._fileName}) Successful!"
         except (FileNotFoundError, PermissionError):
-            temp = '/'.join(self.__fileName.split('/')[:-1])
+            temp = '/'.join(self._fileName.split('/')[:-1])
             M1.makedirs(temp)
-            return self.__create(data)
+            return self._create(data)
         except Exception as error:
             raise Exception(
-                f"Mehrshad.FileManage.Json.__create({self.__fileName}) Error: {error}"
+                f"Mehrshad.FileManage.Json._create({self._fileName}) Error: {error}"
             )
 
     def clear(self):
@@ -128,15 +129,15 @@ class Json:
         """
         try:
             self.write({})
-            self.__data = {}
-            return f"Mehrshad.FileManage.Json.clear({self.__fileName}) Successful!"
+            self._data = {}
+            return f"Mehrshad.FileManage.Json.clear({self._fileName}) Successful!"
         except FileNotFoundError:
             raise FileNotFoundError(
-                f"Mehrshad.FileManage.Json.clear({self.__fileName}) Error: {self.__fileName} does not exist!"
+                f"Mehrshad.FileManage.Json.clear({self._fileName}) Error: {self._fileName} does not exist!"
             )
         except Exception as error:
             raise Exception(
-                f"Mehrshad.FileManage.Json.clear({self.__fileName}) Error: {error}"
+                f"Mehrshad.FileManage.Json.clear({self._fileName}) Error: {error}"
             )
 
     def read(self, getKeys: bool = False):
@@ -155,23 +156,23 @@ class Json:
             dict: the read data from json file. (if you set getKeys to True a list will return too)
         """
         try:
-            with open(self.__fileName, 'r') as json_file:
-                self.__data = M2.load(json_file)
+            with open(self._fileName, 'r') as json_file:
+                self._data = M2.load(json_file)
 
             if getKeys:
-                return self.__data, list(self.__data.keys())
-            return self.__data
+                return self._data, list(self._data.keys())
+            return self._data
         except FileNotFoundError:
             raise RuntimeError(
-                f"Mehrshad.FileManage.Json.read({self.__fileName}) Error: {self.__fileName} does not exist!"
+                f"Mehrshad.FileManage.Json.read({self._fileName}) Error: {self._fileName} does not exist!"
             )
         except M2.decoder.JSONDecodeError:
             raise UnicodeError(
-                f"Mehrshad.FileManage.Json.read({self.__fileName}) Error: {self.__fileName} is empty!"
+                f"Mehrshad.FileManage.Json.read({self._fileName}) Error: {self._fileName} is empty!"
             )
         except Exception as error:
             raise Exception(
-                f"Mehrshad.FileManage.Json.read({self.__fileName}) Error: {error}"
+                f"Mehrshad.FileManage.Json.read({self._fileName}) Error: {error}"
             )
 
     def update(self,
@@ -193,9 +194,9 @@ class Json:
         """
         try:
             if replaceData:
-                self.__data = data
+                self._data = data
             else:
-                self.__data.update(data)
+                self._data.update(data)
             if write:
                 self.save()
             return f"Mehrshad.FileManage.Json.update({data}) Successful!"
@@ -219,19 +220,19 @@ class Json:
             str: status of works at the end.
         """
         try:
-            with open(self.__fileName, 'w') as json_file:
-                M2.dump(self.__data,
+            with open(self._fileName, 'w') as json_file:
+                M2.dump(self._data,
                         json_file,
                         indent=indent,
                         sort_keys=sortKeys)
-            return f"Mehrshad.FileManage.Json.save({self.__fileName}) Successful!"
+            return f"Mehrshad.FileManage.Json.save({self._fileName}) Successful!"
         except FileNotFoundError:
             raise RuntimeError(
-                f"Mehrshad.FileManage.Json.save({self.__fileName}) Error: {self.__fileName} does not exist!"
+                f"Mehrshad.FileManage.Json.save({self._fileName}) Error: {self._fileName} does not exist!"
             )
         except Exception as error:
             raise Exception(
-                f"Mehrshad.FileManage.Json.save({self.__fileName}) Error: {error}"
+                f"Mehrshad.FileManage.Json.save({self._fileName}) Error: {error}"
             )
 
     def write(self, data: dict, indent: int = 4, sortKeys: bool = True):
@@ -251,23 +252,23 @@ class Json:
             str: status of works at the end.
         """
         try:
-            with open(self.__fileName, 'w') as json_file:
+            with open(self._fileName, 'w') as json_file:
                 M2.dump(data, json_file, indent=indent, sort_keys=sortKeys)
-            return f"Mehrshad.FileManage.Json.write({self.__fileName}) Successful!"
+            return f"Mehrshad.FileManage.Json.write({self._fileName}) Successful!"
         except FileNotFoundError:
             raise RuntimeError(
-                f"Mehrshad.FileManage.Json.write({self.__fileName}) Error: {self.__fileName} does not exist!"
+                f"Mehrshad.FileManage.Json.write({self._fileName}) Error: {self._fileName} does not exist!"
             )
         except Exception as error:
             raise Exception(
-                f"Mehrshad.FileManage.Json.write({self.__fileName}) Error: {error}"
+                f"Mehrshad.FileManage.Json.write({self._fileName}) Error: {error}"
             )
 
 
 class Text:
-    """text.
+    """This is the Text class! You can create, edit, update, ... the txt files.
     
-    NOTE: you can only enter file name as filePath argument.
+    NOTE: You can only enter file name as filePath argument.
     ---
     
     Functions:
@@ -275,14 +276,13 @@ class Text:
     + read(getKeys: bool = False)
     + update(data: dict = {}, replaceData: bool = False, write: bool = False)
     + save(indent: int = 4, sortKeys: bool = True)
-    + write(data: dict, indent: int = 4, sortKeys: bool = True)
     
     Methods:
     ---
-    + you can use '+' sign between a Json object and dict, and that will create a new Json object with updated data (dict).
-    + you can use '+=' between a Json object and dict, and it will update the current data of Json object.
+    + You can use '+' sign between a Json object and dict, and that will create a new Json object with updated data (dict).
+    + You can use '+=' between a Json object and dict, and it will update the current data of Json object.
     """
-    def __init__(self, filePath: str):
+    def __init__(self, filePath: str, autoSave: bool = True):
         filePath = filePath.strip().replace('\\', '/')
         if filePath == '' or filePath.split('/')[-1] == '':
             raise RuntimeError(
@@ -290,24 +290,26 @@ class Text:
             )
         if filePath[0] == '/': filePath = filePath[1:]
         if filePath[-1] == '/': filePath = filePath[:-1]
-        self.__fileName = filePath
-        if len(self.__fileName) > 4:
-            if self.__fileName[-4:] != '.txt':
-                self.__fileName += '.txt'
+        self._fileName = filePath
+        self._autoSave = autoSave
+        if len(self._fileName) > 4:
+            if self._fileName[-4:] != '.txt':
+                self._fileName += '.txt'
         else:
-            self.__fileName += '.txt'
+            self._fileName += '.txt'
+
         try:
-            self.__data = self.read()
+            self._data = self.read()
         except:
-            self.__data = ''
-            self.update(self.__data, write=True)
+            self._data = ''
+            self._create(self._data)
 
     def __str__(self):
-        return str(self.__data)
+        return str(self._data)
 
     def __add__(self, data):
-        temp = self.__copy__()
-        temp.__data = self.__data.copy()
+        temp = self._copy__()
+        temp._data = self._data.copy()
         temp.update(data)
         return temp
 
@@ -316,9 +318,9 @@ class Text:
         return self
 
     def __copy__(self):
-        return type(self)(self.__fileName)
+        return type(self)(self._fileName)
 
-    def __create(self, data=''):
+    def _create(self, data=''):
         """this function is used for creating a txt file based on the name and
         address you entered in when you were creating a Text object.
 
@@ -332,17 +334,19 @@ class Text:
             str: status of works at the end.
         """
         try:
-            open(self.__fileName, 'a+')
+            open(self._fileName, 'a+')
             if data != '' and data != [] and data != {}:
-                self.update(data, write=True)
-            return f"Mehrshad.FileManage.Text.__create({self.__fileName}) Successful!"
+                self.update(data, save=True)
+            return f"Mehrshad.FileManage.Text._create({self._fileName}) Successful!"
+
         except (FileNotFoundError, PermissionError):
-            temp = '/'.join(self.__fileName.split('/')[:-1])
+            temp = '/'.join(self._fileName.split('/')[:-1])
             M1.makedirs(temp)
-            return self.__create(data)
+            self._create(data)
+
         except Exception as error:
             raise Exception(
-                f"Mehrshad.FileManage.Text.__create({self.__fileName}) Error: {error}"
+                f"Mehrshad.FileManage.Text._create({self._fileName}) Error: {error}"
             )
 
     def clear(self):
@@ -356,17 +360,17 @@ class Text:
             str: status of works at the end.
         """
         try:
-            temp = open(self.__fileName, 'a+')
+            temp = open(self._fileName, 'a+')
             temp.truncate(0)
-            self.__data = ''
-            return f"Mehrshad.FileManage.Text.clear({self.__fileName}) Successful!"
+            self._data = ''
+            return f"Mehrshad.FileManage.Text.clear({self._fileName}) Successful!"
         except FileNotFoundError:
             raise FileNotFoundError(
-                f"Mehrshad.FileManage.Text.clear({self.__fileName}) Error: {self.__fileName} does not exist!"
+                f"Mehrshad.FileManage.Text.clear({self._fileName}) Error: {self._fileName} does not exist!"
             )
         except Exception as error:
             raise Exception(
-                f"Mehrshad.FileManage.Text.clear({self.__fileName}) Error: {error}"
+                f"Mehrshad.FileManage.Text.clear({self._fileName}) Error: {error}"
             )
 
     def read(self):
@@ -385,30 +389,31 @@ class Text:
             dict: the read data from json file. (if you set getKeys to True a list will return too)
         """
         try:
-            with open(self.__fileName, 'r') as txt_file:
-                self.__data = txt_file.read()
+            with open(self._fileName, 'r') as txt_file:
+                self._data = txt_file.read()
+            return self._data
 
-            return self.__data
         except FileNotFoundError:
             raise RuntimeError(
-                f"Mehrshad.FileManage.Text.read({self.__fileName}) Error: {self.__fileName} does not exist!"
+                f"Mehrshad.FileManage.Text.read({self._fileName}) Error: {self._fileName} does not exist!"
             )
+
         except Exception as error:
             raise Exception(
-                f"Mehrshad.FileManage.Text.read({self.__fileName}) Error: {error}"
+                f"Mehrshad.FileManage.Text.read({self._fileName}) Error: {error}"
             )
 
     def update(self,
-               data: str,
-               replaceData: bool = False,
-               write: bool = False,
+               data: M3[str, list, dict, int] = '',
+               save: bool = False,
+               overwrite: bool = False,
                newLine: bool = False):
         """you can update/replace existed data with something you entered.
 
         Args:
             data (dict): the data you want to update/replace the current data.
-            replaceData (bool, optional): set it to True if you want to replace the current data with the data you entered. Defaults to False.
-            write (bool, optional): if you set this to True it will write to json file after updating/replacing data. Defaults to False.
+            save (bool, optional): if you set this to True it will save to json file after updating/replacing data. Defaults to False.
+            overwrite (bool, optional): set it to True if you want to replace the current data with the data you entered. Defaults to False.
 
         Raises:
             Exception: if anything unknown happens! for the most common errors it got solutions.
@@ -417,20 +422,48 @@ class Text:
             str: status of works at the end.
         """
         try:
+            data = str(data)
             if newLine:
                 data = '\n' + data
-            if replaceData:
-                self.__data = data
+            if overwrite:
+                self._data = data
             else:
-                self.__data += data
-            if write:
+                self._data += data
+            if save or self._autoSave:
                 self.save()
             return f"Mehrshad.FileManage.Text.update({data}) Successful!"
+
         except Exception as error:
             raise Exception(
                 f"Mehrshad.FileManage.Text.update({data}) Error: {error}")
 
-    def save(self, indent: int = 4, sortKeys: bool = True):
+    @property
+    def address(self):
+        return self._fileName
+
+    @address.setter
+    def address(self, filePath: str):
+        filePath = filePath.strip().replace('\\', '/')
+        if filePath == '' or filePath.split('/')[-1] == '':
+            raise RuntimeError(
+                f"Mehrshad.FileManage.Text.path('{filePath}') Error: '{filePath}' is not a proper name!"
+            )
+        if filePath[0] == '/': filePath = filePath[1:]
+        if filePath[-1] == '/': filePath = filePath[:-1]
+        self._fileName = filePath
+        if len(self._fileName) > 4:
+            if self._fileName[-4:] != '.txt':
+                self._fileName += '.txt'
+        else:
+            self._fileName += '.txt'
+
+        try:
+            self._data = self.read()
+        except:
+            self._data = ''
+            self._create(self._data)
+
+    def save(self):
         """this function is used for updating the json file with the data value
         in Json object.
 
@@ -446,43 +479,14 @@ class Text:
             str: status of works at the end.
         """
         try:
-            with open(self.__fileName, 'w') as txt_file:
-                txt_file.write(self.__data)
-            return f"Mehrshad.FileManage.Text.save({self.__fileName}) Successful!"
+            with open(self._fileName, 'w') as txt_file:
+                txt_file.write(self._data)
+            return f"Mehrshad.FileManage.Text.save({self._fileName}) Successful!"
         except FileNotFoundError:
             raise RuntimeError(
-                f"Mehrshad.FileManage.Text.save({self.__fileName}) Error: {self.__fileName} does not exist!"
+                f"Mehrshad.FileManage.Text.save({self._fileName}) Error: {self._fileName} does not exist!"
             )
         except Exception as error:
             raise Exception(
-                f"Mehrshad.FileManage.Text.save({self.__fileName}) Error: {error}"
-            )
-
-    def write(self, data: dict, indent: int = 4, sortKeys: bool = True):
-        """you can use this function when want to replace all of Text file data with
-        some data you entered.
-
-        Args:
-            data (dict): the data you want to replace the current data of Text file with.
-            indent (int, optional): the output Text file length of tabs (indent). Defaults to 4.
-            sortKeys (bool, optional): set if to False if you don't want to sort dict keys in Text file. Defaults to True.
-
-        Raises:
-            RuntimeError: this error happens if the file isn't found.
-            Exception: if anything unknown happens! for the most common errors it got solutions.
-
-        Returns:
-            str: status of works at the end.
-        """
-        try:
-            with open(self.__fileName, 'w') as json_file:
-                M2.dump(data, json_file, indent=indent, sort_keys=sortKeys)
-            return f"Mehrshad.FileManage.Text.write({self.__fileName}) Successful!"
-        except FileNotFoundError:
-            raise RuntimeError(
-                f"Mehrshad.FileManage.Text.write({self.__fileName}) Error: {self.__fileName} does not exist!"
-            )
-        except Exception as error:
-            raise Exception(
-                f"Mehrshad.FileManage.Text.write({self.__fileName}) Error: {error}"
+                f"Mehrshad.FileManage.Text.save({self._fileName}) Error: {error}"
             )
