@@ -1,32 +1,32 @@
 """
-mehrshad.fileManage:
+mehrshad.fileManage module:
 ===
- thanks for using my package!
- this is the fileManage file of my package.
- it provides all of my classes that built for file managing.
+Thanks again for using my Python package, it means a lot to
+me! This module will provide all of the file-managing classes which includes Json
+and Text. Other class like Excel and Sql, will be added soon...
     
-naming:
+Naming:
 ---
- I used camelCase for nameing functions,
- and PascalCase for naming classes.
++ Functions | Modules - camelCase
++ Classes - PascalCase
 
-class names in this file:
+Class names in this file:
 ---
- Json: This class will let you manage everything about json files very easily! you can create, write, save, update and etc.
- Text: coming soon ...
- Excel: coming soon ...
- SQL: coming soon ...
++ Json: This class will let you to manage everything about the json files very easily! You can create, write, save, update, etc.
++ Text: This is the Text class! You can create, edit, update, ... the txt files.
++ Excel: Coming soon...
++ Sql: Coming soon...
     
-note:
+Note:
 ---
- please report any bug, suggestion, idea and etc.
+Please report any bug, suggestion, idea, etc.
  
-credits:
+Credits:
 ---
- Author: (Ali) Mehrshad Dadashzadeh
- GitHub: https://github.com/mehrshaad/mehrshad-pypi
- LinkedIn: https://www.linkedin.com/in/mehrshad-dadashzadeh-7053491b3
- PyPI: https://pypi.org/project/mehrshad
++ Author: (Ali) Mehrshad Dadashzadeh
++ GitHub: https://github.com/mehrshaad/mehrshad-pypi
++ LinkedIn: https://www.linkedin.com/in/mehrshad-dadashzadeh-7053491b3
++ PyPI: https://pypi.org/project/mehrshad
 """
 import os as M1
 import json as M2
@@ -35,11 +35,8 @@ from typing import Union as M3
 
 class Json:
     """This is the Json class. You can use it for managing json files.
-    Everything you need for managing your data with a json file, is in here!
-    It'll automatically creates json file if it wasn't there.
-    
-    NOTE: You can only enter file name as filePath argument.
-    ---
+    Everything you need for managing your data with a json file, is here!
+    It'll automatically creates a json file if it wasn't there already.
     
     Functions:
     ---
@@ -50,10 +47,10 @@ class Json:
     
     Methods:
     ---
-    + you can use '+' sign between a Json object and dict, and that will create a new Json object with updated data (dict).
-    + you can use '+=' between a Json object and dict, and it will update the current data of Json object.
+    + You can use '+' sign between a Json object and dict, and that will create a new Json object with updated data (dict).
+    + You can use '+=' between a Json object and dict, and it will update the current data of Json object.
     """
-    def __init__(self, filePath: str, data: dict = {}):
+    def __init__(self, filePath: str, data: dict = {}, autoSave: bool = True):
         filePath = filePath.strip().replace('\\', '/')
         if filePath == '' or filePath.split('/')[-1] == '':
             raise RuntimeError(
@@ -62,6 +59,7 @@ class Json:
         if filePath[0] == '/': filePath = filePath[1:]
         if filePath[-1] == '/': filePath = filePath[:-1]
         self._fileName = filePath
+        self._autoSave = autoSave
         if len(self._fileName) > 5:
             if self._fileName[-5:] != '.json':
                 self._fileName += '.json'
@@ -71,7 +69,7 @@ class Json:
             self._data = self.read()
         except:
             self._data = data
-        self.update(data)
+        self._create(data)
         self.save()
 
     def __str__(self):
@@ -91,17 +89,17 @@ class Json:
         return type(self)(self._fileName)
 
     def _create(self, data: dict = {}):
-        """this function is used for creating a json file based on the name and
+        """This function is used for creating a json file based on the name and
         address you entered in when you were creating a Json object.
 
         Args:
-            data (dict, optional): you can input the data you want to place in the json file. Defaults to {}.
+            data (dict, optional): You can input the data you want to place in the json file. Defaults to {}.
 
         Raises:
-            Exception: if anything unknown happens! for the most common errors it got solutions.
+            Exception: If anything unknown happens! For the most common errors it got solutions.
 
         Returns:
-            str: status of works at the end.
+            str: Status of works at the end.
         """
         try:
             open(self._fileName, 'a+')
@@ -110,6 +108,7 @@ class Json:
             return f"Mehrshad.FileManage.Json._create({self._fileName}) Successful!"
         except (FileNotFoundError, PermissionError):
             temp = '/'.join(self._fileName.split('/')[:-1])
+            print(temp)
             M1.makedirs(temp)
             return self._create(data)
         except Exception as error:
@@ -118,14 +117,14 @@ class Json:
             )
 
     def clear(self):
-        """use this function if you wand to clear all data from a json file.
+        """Use this function if you wand to clear all the data from the json file.
 
         Raises:
-            FileNotFoundError: this error happens if the file isn't found.
-            Exception: if anything unknown happens! for the most common errors it got solutions.
+            FileNotFoundError: This error happens if the file isn't found.
+            Exception: If anything unknown happens! For the most common errors it got solutions.
 
         Returns:
-            str: status of works at the end.
+            str: Status of works at the end.
         """
         try:
             self.write({})
@@ -141,19 +140,19 @@ class Json:
             )
 
     def read(self, getKeys: bool = False):
-        """call this function when you want to read all
+        """Call this function when you want to read all
         data from the json file you created a Json object with.
 
         Args:
-            getKeys (bool, optional): set it to True if you want to get the list of keys. Defaults to False.
+            getKeys (bool, optional): Set it to True if you want to get the list of keys. Defaults to False.
 
         Raises:
-            RuntimeError: this error happens if the file isn't found.
-            UnicodeError: this error raises if the json file is empty!
-            Exception: if anything unknown happens! for the most common errors it got solutions.
+            RuntimeError: This error happens if the file isn't found.
+            UnicodeError: This error raises if the json file is empty!
+            Exception: If anything unknown happens! For the most common errors it got solutions.
 
         Returns:
-            dict: the read data from json file. (if you set getKeys to True a list will return too)
+            dict: The read data from json file. (If you set getKeys to True a list will return too)
         """
         try:
             with open(self._fileName, 'r') as json_file:
@@ -179,25 +178,25 @@ class Json:
                data: dict,
                replaceData: bool = False,
                write: bool = False):
-        """you can update/replace existed data with something you entered.
+        """You can update/replace the existed data with some data you entered.
 
         Args:
-            data (dict): the data you want to update/replace the current data.
-            replaceData (bool, optional): set it to True if you want to replace the current data with the data you entered. Defaults to False.
-            write (bool, optional): if you set this to True it will write to json file after updating/replacing data. Defaults to False.
+            data (dict): The data you want to update/replace the current data.
+            replaceData (bool, optional): Set it to True if you want to replace the current data with the data you entered. Defaults to False.
+            write (bool, optional): If you set this to True it will write to json file after updating/replacing data. Defaults to False.
 
         Raises:
-            Exception: if anything unknown happens! for the most common errors it got solutions.
+            Exception: If anything unknown happens! For the most common errors it got solutions.
 
         Returns:
-            str: status of works at the end.
+            str: Status of works at the end.
         """
         try:
             if replaceData:
                 self._data = data
             else:
                 self._data.update(data)
-            if write:
+            if write or self._autoSave:
                 self.save()
             return f"Mehrshad.FileManage.Json.update({data}) Successful!"
         except Exception as error:
@@ -205,19 +204,19 @@ class Json:
                 f"Mehrshad.FileManage.Json.update({data}) Error: {error}")
 
     def save(self, indent: int = 4, sortKeys: bool = True):
-        """this function is used for updating the json file with the data value
+        """This function is used for updating the json file with the data value
         in Json object.
 
         Args:
-            indent (int, optional): the output json file length of tabs (indent). Defaults to 4.
-            sortKeys (bool, optional): set if to False if you don't want to sort dict keys in json file. Defaults to True.
+            indent (int, optional): The length of the output json file tabs (indent). Defaults to 4.
+            sortKeys (bool, optional): Set if to False if you don't want to sort dict keys in json file. Defaults to True.
 
         Raises:
-            RuntimeError: this error happens if the file isn't found.
-            Exception: if anything unknown happens! for the most common errors it got solutions.
+            RuntimeError: This error happens if the file isn't found.
+            Exception: If anything unknown happens! For the most common errors it got solutions.
 
         Returns:
-            str: status of works at the end.
+            str: Status of works at the end.
         """
         try:
             with open(self._fileName, 'w') as json_file:
@@ -236,20 +235,20 @@ class Json:
             )
 
     def write(self, data: dict, indent: int = 4, sortKeys: bool = True):
-        """you can use this function when want to replace all of json file data with
-        some data you entered.
+        """You can use this function when want to replace all of the json file's data with
+        some data you just entered.
 
         Args:
-            data (dict): the data you want to replace the current data of json file with.
-            indent (int, optional): the output json file length of tabs (indent). Defaults to 4.
-            sortKeys (bool, optional): set if to False if you don't want to sort dict keys in json file. Defaults to True.
+            data (dict): The data you want to replace the current data of json file with.
+            indent (int, optional): The output json file length of tabs (indent). Defaults to 4.
+            sortKeys (bool, optional): Set if to False if you don't want to sort dict keys in json file. Defaults to True.
 
         Raises:
-            RuntimeError: this error happens if the file isn't found.
-            Exception: if anything unknown happens! for the most common errors it got solutions.
+            RuntimeError: This error happens if the file isn't found.
+            Exception: If anything unknown happens! For the most common errors it got solutions.
 
         Returns:
-            str: status of works at the end.
+            str: Status of works at the end.
         """
         try:
             with open(self._fileName, 'w') as json_file:
@@ -267,22 +266,31 @@ class Json:
 
 class Text:
     """This is the Text class! You can create, edit, update, ... the txt files.
-    
-    NOTE: You can only enter file name as filePath argument.
-    ---
+    The txt file will be automatically created if it doesn't already exist. You
+    can add your data by using the update function.
     
     Functions:
     ---
-    + read(getKeys: bool = False)
-    + update(data: dict = {}, replaceData: bool = False, write: bool = False)
-    + save(indent: int = 4, sortKeys: bool = True)
+    + read()
+    + save()
+    + clear()
+    + update(data: str, list, dict, int = '', save: bool = False, overwrite: bool = False, newLine: bool = False)
     
     Methods:
     ---
-    + You can use '+' sign between a Json object and dict, and that will create a new Json object with updated data (dict).
-    + You can use '+=' between a Json object and dict, and it will update the current data of Json object.
+    + You can change the address of the txt file by using address method and adding a str that show the path of file.
+    + You can use '+=' between a Text object and str, then it'll updates the txt file data.
     """
     def __init__(self, filePath: str, autoSave: bool = True):
+        """
+
+        Args:
+            filePath (str): [description]
+            autoSave (bool, optional): [description]. Defaults to True.
+
+        Raises:
+            RuntimeError: [description]
+        """
         filePath = filePath.strip().replace('\\', '/')
         if filePath == '' or filePath.split('/')[-1] == '':
             raise RuntimeError(
@@ -307,12 +315,6 @@ class Text:
     def __str__(self):
         return str(self._data)
 
-    def __add__(self, data):
-        temp = self._copy__()
-        temp._data = self._data.copy()
-        temp.update(data)
-        return temp
-
     def __iadd__(self, data):
         self.update(data)
         return self
@@ -321,17 +323,17 @@ class Text:
         return type(self)(self._fileName)
 
     def _create(self, data=''):
-        """this function is used for creating a txt file based on the name and
-        address you entered in when you were creating a Text object.
+        """This function is used for creating a txt file based on the name and
+        address you entered in, when you were creating a Text object.
 
         Args:
-            data (optional): you can input the data you want to place in the json file. Defaults to ''.
+            data (str, optional): You can input the data you want to place in the txt file. Defaults to ''.
 
         Raises:
-            Exception: if anything unknown happens! for the most common errors it got solutions.
+            Exception: If anything unknown happens!
 
         Returns:
-            str: status of works at the end.
+            str: Result of the function.
         """
         try:
             open(self._fileName, 'a+')
@@ -350,14 +352,14 @@ class Text:
             )
 
     def clear(self):
-        """use this function if you wand to clear all data from a json file.
+        """Use this function if you wand to clear all data from a txt file.
 
         Raises:
-            FileNotFoundError: this error happens if the file isn't found.
-            Exception: if anything unknown happens! for the most common errors it got solutions.
+            FileNotFoundError: This error happens if the file isn't found.
+            Exception: If anything unknown happens! For the most common errors it got solutions.
 
         Returns:
-            str: status of works at the end.
+            str: Status of works at the end.
         """
         try:
             temp = open(self._fileName, 'a+')
@@ -374,19 +376,16 @@ class Text:
             )
 
     def read(self):
-        """call this function when you want to read all
-        data from the json file you created a Json object with.
-
-        Args:
-            getKeys (bool, optional): set it to True if you want to get the list of keys. Defaults to False.
+        """Call this function when you want to read all
+        data from the txt file you created a Text object with, or
+        update the existing data.
 
         Raises:
-            RuntimeError: this error happens if the file isn't found.
-            UnicodeError: this error raises if the json file is empty!
-            Exception: if anything unknown happens! for the most common errors it got solutions.
+            RuntimeError: This error happens if the file isn't found.
+            Exception: If anything unknown happens! For the most of the common errors it got solutions.
 
         Returns:
-            dict: the read data from json file. (if you set getKeys to True a list will return too)
+            str: The read data from txt file.
         """
         try:
             with open(self._fileName, 'r') as txt_file:
@@ -404,22 +403,23 @@ class Text:
             )
 
     def update(self,
-               data: M3[str, list, dict, int] = '',
+               data: M3[str, list, dict, int],
                save: bool = False,
                overwrite: bool = False,
                newLine: bool = False):
-        """you can update/replace existed data with something you entered.
+        """This function is used for updating or replacing the data of the Text object.
 
         Args:
-            data (dict): the data you want to update/replace the current data.
-            save (bool, optional): if you set this to True it will save to json file after updating/replacing data. Defaults to False.
-            overwrite (bool, optional): set it to True if you want to replace the current data with the data you entered. Defaults to False.
+            data (str | list | dict | int): The data you want to add or replace.
+            save (bool, optional): A boolean that decides whether the file'll be saved or not. Defaults to False.
+            overwrite (bool, optional): Set it to True in order to replace the existing data. Defaults to False.
+            newLine (bool, optional): By setting it to True, added data will be written in the next line. Defaults to False.
 
         Raises:
-            Exception: if anything unknown happens! for the most common errors it got solutions.
+            Exception: If anything uncommon happens!
 
         Returns:
-            str: status of works at the end.
+            str: As a result of function works.
         """
         try:
             data = str(data)
@@ -464,19 +464,14 @@ class Text:
             self._create(self._data)
 
     def save(self):
-        """this function is used for updating the json file with the data value
-        in Json object.
-
-        Args:
-            indent (int, optional): the output json file length of tabs (indent). Defaults to 4.
-            sortKeys (bool, optional): set if to False if you don't want to sort dict keys in json file. Defaults to True.
+        """This function will save the txt file.
 
         Raises:
-            RuntimeError: this error happens if the file isn't found.
-            Exception: if anything unknown happens! for the most common errors it got solutions.
+            RuntimeError: This error happens if the file isn't found.
+            Exception: If anything unknown happens! For the most common errors it got solutions.
 
         Returns:
-            str: status of works at the end.
+            str: Status of function works.
         """
         try:
             with open(self._fileName, 'w') as txt_file:

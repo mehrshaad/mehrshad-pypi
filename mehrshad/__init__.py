@@ -1,23 +1,28 @@
 """
-+ mehrshad:
-    huge thanks for installing and using my package!
-    this package is all of my works in python.
-    every needed external imported package will be installed after the first you run your python file when imported this package.
+mehrshad module:
+===
+Huge thanks for installing and using my package!
+This package is all of my works in Python.
+Every external imported package/module will be installed after the first run!.
+Hope you enjoy using it and please help me to make it more usefull.
     
-+ naming:
-    I used camelCase for nameing functions,
-    and PascalCase for naming classes.
+Naming:
+---
++ Functions | Modules - camelCase
++ Classes - PascalCase
 
-+ function names in this file:
-    Json: this class will let you manage everything about json files very easily! you can create, write, save, update and etc.
-    Excel: [description]
-    Text: [description]
+Functions:
+---
++ Functions count is 56!
++ I'm gradually completing their details and summaries.
++ List of their names will be added soon...
     
-+ credits:
-    author: (Ali) Mehrshad Dadashzadeh
-    github: https://github.com/mehrshaad/mehrshad-pypi
-    linkedIn: https://www.linkedin.com/in/mehrshad-dadashzadeh-7053491b3
-    pypi: https://pypi.org/project/mehrshad
+Credits:
+---
++ Author: (Ali) Mehrshad Dadashzadeh
++ GitHub: https://github.com/mehrshaad/mehrshad-pypi
++ LinkedIn: https://www.linkedin.com/in/mehrshad-dadashzadeh-7053491b3
++ PyPI: https://pypi.org/project/mehrshad
 """
 
 import os
@@ -25,19 +30,23 @@ import subprocess
 import turtle
 from collections import Counter
 from math import factorial, gcd, sqrt
+from typing import Union as types
+
+from sympy import isprime as isPrime
 
 try:
     from tqdm import tqdm as loopProgress  # progress feature in loops
 except ModuleNotFoundError:
+    print('Hello! Sit back and let the packages to be installed...')
     subprocess.call(['pip3', 'install', 'tqdm'])
     from tqdm import tqdm as loopProgress
 
 try:
-    from pynotifier import Notification as notification
+    from pynotifier import Notification as sendNotification
 except ModuleNotFoundError:
     subprocess.call(['pip3', 'install', 'win10toast'])
     subprocess.call(['pip3', 'install', 'py-notifier'])
-    from pynotifier import Notification as notification
+    from pynotifier import Notification as sendNotification
 
 
 def binomialTheorem(power: int,
@@ -66,7 +75,7 @@ def binomialTheorem(power: int,
     try:
         if printInput:  # printing (x+y)^power
             if supPower:
-                print(f'({alphas[0]}+{alphas[1]}){Number_to_Power(power)}')
+                print(f'({alphas[0]}+{alphas[1]}){numToPower(power)}')
             else:
                 print(f'({alphas[0]}+{alphas[1]})^{power}')
         output = []  # an empty list that we place the output things in it
@@ -75,8 +84,8 @@ def binomialTheorem(power: int,
             C = combination(power, k)
             if supPower:
                 # making number power like (some os's might not support)
-                NP1 = Number_to_Power(k)
-                NP2 = Number_to_Power(power - k)
+                NP1 = numToPower(k)
+                NP2 = numToPower(power - k)
             else:
                 NP1 = f'^{k}'
                 NP2 = f'^{power-k}'
@@ -194,13 +203,21 @@ def countDigits(number: int):
     return len(str(number))
 
 
-def createTxt(text,
+def createTxt(text: types[str, list, dict, int],
               address: str = '.',
               fileName: str = 'Text',
               clearTxt: bool = True):
-    """Used For Creating a .txt file in your address"""
+    """You can use this function for creating txt files in
+    your own address.
+
+    Args:
+        text (str | list | dict | int): The text you want to write in the txt file.
+        address (str, optional): The address you want you txt file to be in. Defaults to '.'.
+        fileName (str, optional): The file name of your txt file. Defaults to 'Text'.
+        clearTxt (bool, optional): By setting this boolean to True the txt file will be cleared. Defaults to True.
+    """
     try:
-        with open(f'{address}\{fileName}.txt', 'a+') as file:
+        with open(f'{address}\\{fileName}.txt', 'a+') as file:
             if clearTxt:
                 file.truncate(0)
             file.write(str(text))
@@ -209,9 +226,9 @@ def createTxt(text,
         createTxt(text, address, fileName, clearTxt)
 
 
-def Diamond_Pattern(Number_of_Rows):
+def diamondPattern(Number_of_Rows):
     """For Creating Diamond Patterns Built From ' * '"""
-    def Star_Shapes(Num):
+    def starShapes(Num):
         return '*' * Num
 
     DP1 = 1
@@ -219,20 +236,20 @@ def Diamond_Pattern(Number_of_Rows):
     DP3 = int(DP2) - 1
     for iDP in range(1, Number_of_Rows + 1):
         if iDP < DP2:
-            print(" " * DP3, Star_Shapes(DP1))
+            print(" " * DP3, starShapes(DP1))
             DP1 += 2
             DP3 -= 1
         elif iDP == (DP2 + 0.5):
-            print(Star_Shapes(Number_of_Rows))
+            print(starShapes(Number_of_Rows))
             DP1 = DP1 - 2
             DP3 = 0
         else:
-            print(" " * DP3, Star_Shapes(DP1))
+            print(" " * DP3, starShapes(DP1))
             DP1 = DP1 - 2
             DP3 += 1
 
 
-def Divisor_Counter(number):
+def divisorCounter(number):
     cnt = 0
     for i in range(1, (int)(sqrt(number)) + 1):
         if (number % i == 0):
@@ -243,7 +260,7 @@ def Divisor_Counter(number):
     return cnt
 
 
-def Divisor_Sigma(number: int):
+def divisorSigma(number: int):
     SumDS = number
     for iDC in range(1, number // 2 + 1):
         if number % iDC == 0:
@@ -251,16 +268,16 @@ def Divisor_Sigma(number: int):
     return SumDS
 
 
-def Divisors(number: int):
-    Divisors_List = []
+def divisors(number: int):
+    divisors_List = []
     for iDL in range(1, number // 2 + 1):
         if number % iDL == 0:
-            Divisors_List.append(iDL)
-    Divisors_List.append(number)
-    return Divisors_List
+            divisors_List.append(iDL)
+    divisors_List.append(number)
+    return divisors_List
 
 
-def Draw_Shape_Turtle(sides, length, Done=False):
+def drawShapeTurtle(sides, length, Done=False):
     if sides >= 3:
         angle = 360.0 / sides
         for sides in range(sides):
@@ -272,19 +289,7 @@ def Draw_Shape_Turtle(sides, length, Done=False):
         return "Slides Should be >= 3!"
 
 
-def Factorial(number):
-    if number == 0:
-        return 1
-    if number > 0:
-        SUMf = 1
-        for iF in range(1, number + 1):
-            SUMf *= iF
-        return SUMf
-    else:
-        return "Wrong Number!"
-
-
-def Fibonacci_Sequence(number):
+def fibonacciSequence(number):
     v1, v2, v3 = 1, 1, 0  # initialise a matrix [[1,1],[1,0]]
     # perform fast exponentiation of the matrix (quickly raise it to the nth power)
     for rec in bin(number)[3:]:
@@ -295,7 +300,7 @@ def Fibonacci_Sequence(number):
     return v2
 
 
-def GCD_of_List(List):
+def gcdList(List):
     counter_g = 1
     temp_g = List[0]
     while counter_g != len(List):
@@ -307,18 +312,18 @@ def GCD_of_List(List):
     return temp_g
 
 
-def Hanoi_Tower(num_of_moves, source, destination, temp):
+def hanoiTower(num_of_moves, source, destination, temp):
     if num_of_moves == 1:
         print('Move Disk %d From %s to %s' %
               (num_of_moves, source, destination))
     else:
-        Hanoi_Tower(num_of_moves - 1, source, temp, destination)
+        hanoiTower(num_of_moves - 1, source, temp, destination)
         print('Move Disk %d From %s to %s' %
               (num_of_moves, source, destination))
-        Hanoi_Tower(num_of_moves - 1, temp, destination, source)
+        hanoiTower(num_of_moves - 1, temp, destination, source)
 
 
-def is_Sum_of_Digit_Power(number, power):
+def isSumOfDigitPower(number, power):
     SumDP = 0
     mioDP = abs(number)
     while mioDP > 0:
@@ -340,59 +345,15 @@ def isComplete(number):
     return False
 
 
-def isEqual_to_Dingit_Factorial(number):
-    if number >= 0:
-
-        def F(number):
-            if number == 0:
-                return 1
-            if number > 0:
-                SUMf = 1
-                for iF in range(1, number + 1):
-                    SUMf *= iF
-                return SUMf
-
-        SumitDF = 0
-        number = str(number)
-        for i in number:
-            SumitDF += F(int(i))
-        if SumitDF == int(number):
-            return True
-        else:
-            return False
-    else:
-        return 'Wrong Number!'
-
-
 def isPalindrom(string):
     return str(string) == str(string)[::-1]
 
 
-def isPrime(number):
-    if number >= 2:
-        prime_list = []
-        for num in range(2, round(sqrt(number)) + 1):
-            prime_flag = True
-            for prime_item in prime_list:
-                if num % prime_item == 0:
-                    prime_flag = False
-                    break
-            if prime_flag:
-                prime_list.append(num)
-        for prime_item in prime_list:
-            if number % prime_item == 0:
-                return False
-        return True
-    if number == 1:
-        return False
-    return 'Number Most Be Bigger Than 0!'
+def lcmList(List):
+    return multiplyList(List) // gcdList(List)
 
 
-def LCM_of_List(List):
-    return Multiply_of_List(List) // GCD_of_List(List)
-
-
-def Magic_Square_Generator(row_column: int, only_sum=False):
+def magicSquareGenerator(row_column: int, only_sum=False):
     if only_sum:
         return row_column * (row_column * row_column + 1) / 2
     MagicSquare = [[0 for x in range(row_column)] for y in range(row_column)]
@@ -420,7 +381,7 @@ def Magic_Square_Generator(row_column: int, only_sum=False):
     return MagicSquare
 
 
-def Mex_of_List(List: list, Return=list):
+def mexList(List: list, Return=list):
     mex = [counter for counter in range(1, max(List)) if counter not in List]
     if mex == []:
         return 'there is no mex!'
@@ -430,8 +391,8 @@ def Mex_of_List(List: list, Return=list):
         return "'Return' value error"
 
 
-def Min_Step_To_Target_Elephant_Chess(first_pos: list, target_pos: list,
-                                      board: int):
+def minStepToTargetElephantChess(first_pos: list, target_pos: list,
+                                 board: int):
     """this function returns minimum step to reach target position
     in chess elephant piece.
 
@@ -486,11 +447,11 @@ def Min_Step_To_Target_Elephant_Chess(first_pos: list, target_pos: list,
                 queue.append(cell(x, y, t.dist + 1))
 
 
-def Multiply_of_List(List):
+def multiplyList(List):
     ans_M = 1
     for items_of_list in List:
         if type(items_of_list) == List:
-            Multiply_of_List(items_of_list)
+            multiplyList(items_of_list)
         try:
             ans_M *= int(items_of_list)
         except:
@@ -498,7 +459,7 @@ def Multiply_of_List(List):
     return ans_M
 
 
-def Next_Bigger_Number_With_Same_Digits(number):
+def nextBiggerNumberWithSameDigits(number):
     numlist = [int(i) for i in str(number)]
 
     index_of_replace_num = -1
@@ -531,7 +492,7 @@ def Next_Bigger_Number_With_Same_Digits(number):
         return int(''.join(str(x) for x in output))
 
 
-def Num_to_Weekday(num, first_day="Saturday", all_week_days=False):
+def numToWeekday(num, first_day="Saturday", all_week_days=False):
     first_day = first_day[0].upper() + first_day[1:].lower()
     week_days = [
         "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
@@ -547,8 +508,8 @@ def Num_to_Weekday(num, first_day="Saturday", all_week_days=False):
     return week_days[num % len(week_days)]
 
 
-def Number_to_Power(number):
-    def to_Power_1_10(number):
+def numToPower(number):
+    def numToSupPower(number):
         if number == 0:
             return '⁰'
         if number == 1:
@@ -572,41 +533,31 @@ def Number_to_Power(number):
 
     NP = []
     while number > 0:
-        NP.append(to_Power_1_10(number % 10))
+        NP.append(numToSupPower(number % 10))
         number //= 10
     NP.reverse()
     NP = ''.join(NP)
     return NP
 
 
-def Permutation(n, r):
+def permutation(n, r):
     if r > n:
         return 'Wrong Input!'
-
-    def F(number):
-        if number == 0:
-            return 1
-        if number > 0:
-            SUMf = 1
-            for iF in range(2, number + 1):
-                SUMf *= iF
-            return SUMf
-
-    return F(n) // (F(n - r))
+    return factorial(n) // (factorial(n - r))
 
 
-def Permutation_Print(lst: list):
+def permutationPrint(lst: list):
     if len(lst) == 1:
         return [lst]
     return_list = []
     for element in lst:
         temp = [var for var in lst if var != element]
-        for t in Permutation_Print(temp):
+        for t in permutationPrint(temp):
             return_list.append([element] + t)
     return return_list
 
 
-def Prime_Factors_List(number):
+def primeFactorsList(number):
     listPF = []
     iPF = 1
     while iPF <= number:
@@ -623,9 +574,9 @@ def Prime_Factors_List(number):
     return listPF
 
 
-def Prime_Roots_With_Power_List(number):
-    def Number_to_Power(number):
-        def to_Power_1_10(number):
+def primeRootsWithPowerList(number):
+    def numToPower(number):
+        def numToSupPower(number):
             if number == 0:
                 return '⁰'
             if number == 1:
@@ -649,7 +600,7 @@ def Prime_Roots_With_Power_List(number):
 
         NP = []
         while number > 0:
-            NP.append(to_Power_1_10(number % 10))
+            NP.append(numToSupPower(number % 10))
             number //= 10
         NP.reverse()
         NP = ''.join(NP)
@@ -677,7 +628,7 @@ def Prime_Roots_With_Power_List(number):
         if NUM == SA[number]:
             POW += 1
             continue
-        POW = Number_to_Power(POW)
+        POW = numToPower(POW)
         ListNR.append(str(NUM) + str(POW))
         NUM = SA[number]
         POW = 1
@@ -685,7 +636,7 @@ def Prime_Roots_With_Power_List(number):
     return ListNR
 
 
-def Primes_Before_List(number):
+def primesBeforeList(number):
     if number >= 1:
         prime_list = []
         for num in range(2, number):
@@ -702,7 +653,7 @@ def Primes_Before_List(number):
     return 'Number Must Be >= 1!'
 
 
-def Reverse_Number(number):
+def reverseNum(number):
     reverse = 0
     while number > 0:
         digit = number % 10
@@ -711,7 +662,7 @@ def Reverse_Number(number):
     return reverse
 
 
-def Sequence_of_Triangle(number: int):
+def sequenceTriangle(number: int):
     """this sequence is like: 1, 3, 6, 10, 15, 21, 28, 36, 45, 55, ...
 
     Arguments:
@@ -726,7 +677,7 @@ def Sequence_of_Triangle(number: int):
         List_Seq += 1
 
 
-def Sudoku_Solver(num_list_9x9: list, blank: str = '0'):
+def sudokuSolver(num_list_9x9: list, blank: str = '0'):
     """this function is used for solving a 9x9 sudoku table.
 
     Arguments:
@@ -788,19 +739,19 @@ def Sudoku_Solver(num_list_9x9: list, blank: str = '0'):
         for i in range(9):
             lns["ln" + str(len(lns) + 1)] = num_list_9x9[i]
 
-        def locate_vars(lst, item):
+        def locateVars(lst, item):
             return [i for i, x in enumerate(lst) if x == item]
 
         locs = [
             ln + " " + str(item) for ln in lns
-            for item in locate_vars(lns[ln], blank)
+            for item in locateVars(lns[ln], blank)
         ]
         possible_nums = {
             loc: ['1', '2', '3', '4', '5', '6', '7', '8', '9']
             for loc in locs
         }
 
-        def naked_single(loc):
+        def nakedSingle(loc):
             ln_of_loc = loc.split()[0]
             col_of_loc = loc.split()[1]
 
@@ -818,7 +769,7 @@ def Sudoku_Solver(num_list_9x9: list, blank: str = '0'):
                 while item in possible_nums[loc]:
                     possible_nums[loc].remove(item)
 
-        def hidden_single(loc):
+        def hiddenSingle(loc):
             locs_of_the_vars_of_the_same_ln = [
                 item for item in locs
                 if item.split()[0] == loc.split()[0] and item != loc
@@ -866,7 +817,7 @@ def Sudoku_Solver(num_list_9x9: list, blank: str = '0'):
                 if len(temps[item1]) == 1:
                     possible_nums[loc] = [temps[item1][0]]
 
-        def naked_pairs(loc):
+        def nakedPairs(loc):
             impossible_nums = []
             categories = {
                 'locs_of_the_vars_of_the_same_ln': [
@@ -896,7 +847,7 @@ def Sudoku_Solver(num_list_9x9: list, blank: str = '0'):
                                     while num in possible_nums[loc]:
                                         possible_nums[loc].remove(num)
 
-        def hidden_pairs(loc):
+        def hiddenPairs(loc):
             categories = {
                 'locs_of_the_vars_of_the_same_ln': [
                     item for item in locs
@@ -951,7 +902,7 @@ def Sudoku_Solver(num_list_9x9: list, blank: str = '0'):
                                         while item3 in possible_nums[item2]:
                                             possible_nums[item2].remove(item3)
 
-        def naked_triples(loc):
+        def nakedTriples(loc):
             impossible_nums = []
             categories = {
                 'locs_of_the_vars_of_the_same_ln': [
@@ -1001,11 +952,11 @@ def Sudoku_Solver(num_list_9x9: list, blank: str = '0'):
         lst = []
         while len(locs) != 0:
             for loc in locs:
-                naked_single(loc)
-                hidden_single(loc)
-                naked_pairs(loc)
-                hidden_pairs(loc)
-                naked_triples(loc)
+                nakedSingle(loc)
+                hiddenSingle(loc)
+                nakedPairs(loc)
+                hiddenPairs(loc)
+                nakedTriples(loc)
                 if len(possible_nums[loc]) == 1:
                     lns[loc.split()[0]][int(
                         loc.split()[1])] = possible_nums[loc][0]
@@ -1017,14 +968,14 @@ def Sudoku_Solver(num_list_9x9: list, blank: str = '0'):
         return 'error'
 
 
-def Sum_of_Digit(number):
+def sumDigit(number):
     SumD = 0
     for iSD in str(number):
         SumD += int(iSD)
     return SumD
 
 
-def Weekday_to_Num(weekday, first_day='saturday'):
+def weekdayToNum(weekday, first_day='saturday'):
     first_day = first_day.lower()
     week_days = [
         'saturday', 'sunday', 'monday', 'tuesday', 'wednesday', 'thursday',
